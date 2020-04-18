@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <title>Duck Debugging</title>
+    <meta name="description" content="Duck Debugging" />
+    <style>
+      .column {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="column">
+      <video
+        poster="./assets/duck.png"
+        src="./assets/duck.mp4"
+        id="duck"
+        loop
+      ></video>
+      <button id="pipButton">
+        Explain it to me with ice cream metaphors
+      </button>
+    </div>
+    <script>
+      if ("pictureInPictureEnabled" in document) {
+        const duckVid = document.getElementById("duck");
+        const pipButton = document.getElementById("pipButton");
+
+        pipButton.addEventListener("click", () => {
+          duckVid
+            .requestPictureInPicture()
+            .then(() => {
+              duckVid.play();
+            })
+            .catch((error) => {
+              console.log(`requestPictureInPicture failed - ${error}`);
+            });
+        });
+      } else {
+        console.log("can't use pictureInPictureEnabled");
+      }
+    </script>
+  </body>
+</html>
